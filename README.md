@@ -39,6 +39,8 @@ ExamOrch is a RESTful API for managing exam sessions with automatic seat allocat
 
 ## Installation
 
+### Run Locally (without Docker)
+
 1. Clone the repository:
 ```bash
 git clone https://github.com/blackeffigyeel/exam-orch
@@ -57,6 +59,40 @@ cp .env.example .env
 
 4. Configure environment variables in `.env`
 
+5. Run the application:
+```bash
+# Development
+npm run dev
+
+# Production
+npm run build
+npm start
+```
+
+The application will be available at `http://localhost:4013`
+
+### Run Locally (with Docker)
+
+1. Clone the repository:
+```bash
+git clone https://github.com/blackeffigyeel/exam-orch
+cd exam-orch
+```
+
+2. Create a `.env` file based on `.env.example`:
+```bash
+cp .env.example .env
+```
+
+3. Configure environment variables in `.env`
+
+4. Build and run with Docker Compose:
+```bash
+docker compose up --build
+```
+
+The application will be available at `http://localhost:4013`
+
 ## Configuration
 
 The application uses environment variables for configuration. Create a `.env` file in the root directory with the following variables:
@@ -65,6 +101,8 @@ The application uses environment variables for configuration. Create a `.env` fi
 PORT=4013
 NODE_ENV=development
 ```
+
+**Note:** When using Docker, make sure the `PORT` in your `.env` file matches the port mapping in your `compose.yml`  file.
 
 ## Running the Application
 

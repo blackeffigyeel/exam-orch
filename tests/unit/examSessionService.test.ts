@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from '@jest/globals';
 import { ExamSessionService } from '../../src/services/examSessionService';
 import examStore from '../../src/models/examStore';
-import { BadRequestError, NotFoundError } from '../../src/errors/errors';
+import { HttpError } from '../../src/errors/errors';
 
 describe('ExamSessionService', () => {
   let service: ExamSessionService;
@@ -46,10 +46,15 @@ describe('ExamSessionService', () => {
       expect(session.data.title).toBe('Physics Exam');
     });
 
-    it('should throw NotFoundError if session does not exist', async () => {
+    it('should throw an error with statusCode 404 (NotFoundError) if session does not exist', async () => {
       await expect(service.getSessionById('non-existent-id'))
         .rejects
-        .toThrow(NotFoundError);
+        .toThrow(HttpError); // Check if it's an HttpError first
+
+      // Then check the specific error properties
+      await expect(service.getSessionById('non-existent-id'))
+        .rejects
+        .toHaveProperty('statusCode', 404); // Check the statusCode specifically
     });
   });
 
@@ -102,7 +107,7 @@ describe('ExamSessionService', () => {
       expect(enrollResult.data.position).toBe(1);
     });
 
-    it('should throw BadRequestError if candidate is already enrolled', async () => {
+    it('should throw an error with statusCode 400 (BadRequestError) if candidate is already enrolled', async () => {
       const sessionResult = await service.createSession(
         'History Exam',
         120,
@@ -126,7 +131,16 @@ describe('ExamSessionService', () => {
           'John Doe',
           'STU001'
         )
-      ).rejects.toThrow(BadRequestError);
+      ).rejects.toThrow(HttpError); // Check if it's an HttpError first
+
+      await expect(
+        service.enrollCandidate(
+          sessionResult.data.id,
+          'john@example.com',
+          'John Doe',
+          'STU001'
+        )
+      ).rejects.toHaveProperty('statusCode', 400); // Check the statusCode specifically
     });
   });
 });

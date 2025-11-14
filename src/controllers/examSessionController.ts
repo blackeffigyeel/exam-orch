@@ -24,7 +24,7 @@ export class ExamSessionController {
         try {
             const { title, duration, maxCandidates, startTime } = req.body;
 
-            const result = await examSessionService.createSession(
+            const result = await this.examSessionService.createSession(
                 title,
                 duration,
                 maxCandidates,
@@ -62,7 +62,7 @@ export class ExamSessionController {
      */
     public getAllSessions = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const result = await examSessionService.getAllSessions();
+            const result = await this.examSessionService.getAllSessions();
 
             return res.status(result.statusCode).json({
                 success: result.success,
@@ -97,7 +97,7 @@ export class ExamSessionController {
         try {
             const { id } = req.params;
 
-            const result = await examSessionService.getSessionById(id);
+            const result = await this.examSessionService.getSessionById(id);
 
             return res.status(result.statusCode).json({
                 success: result.success,
@@ -132,7 +132,7 @@ export class ExamSessionController {
         try {
             const { id } = req.params;
 
-            const result = await examSessionService.closeEnrollment(id);
+            const result = await this.examSessionService.closeEnrollment(id);
 
             return res.status(result.statusCode).json({
                 success: result.success,
@@ -168,7 +168,7 @@ export class ExamSessionController {
             const { id } = req.params;
             const { email, name, studentId } = req.body;
 
-            const result = await examSessionService.enrollCandidate(
+            const result = await this.examSessionService.enrollCandidate(
                 id,
                 email,
                 name,
@@ -208,7 +208,7 @@ export class ExamSessionController {
         try {
             const { id, studentId } = req.params;
 
-            const result = await examSessionService.withdrawCandidate(id, studentId);
+            const result = await this.examSessionService.withdrawCandidate(id, studentId);
 
             return res.status(result.statusCode).json({
                 success: result.success,
@@ -243,7 +243,7 @@ export class ExamSessionController {
         try {
             const { id } = req.params;
 
-            const result = await examSessionService.getEnrolledCandidates(id);
+            const result = await this.examSessionService.getEnrolledCandidates(id);
 
             return res.status(result.statusCode).json({
                 success: result.success,
@@ -278,7 +278,7 @@ export class ExamSessionController {
         try {
             const { id } = req.params;
 
-            const result = await examSessionService.getWaitlistedCandidates(id);
+            const result = await this.examSessionService.getWaitlistedCandidates(id);
 
             return res.status(result.statusCode).json({
                 success: result.success,
@@ -313,7 +313,7 @@ export class ExamSessionController {
         try {
             const { studentId } = req.params;
 
-            const result = await examSessionService.getCandidateStatus(studentId);
+            const result = await this.examSessionService.getCandidateStatus(studentId);
 
             return res.status(result.statusCode).json({
                 success: result.success,
