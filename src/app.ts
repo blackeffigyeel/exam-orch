@@ -91,6 +91,8 @@ const options = {
 const specs = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
+app.use('/public', express.static(path.join(__dirname, '../public')));
+
 // API routes
 app.use("/api", apiRoutes);
 
