@@ -128,6 +128,7 @@ npm start
 
 API documentation is available at:
 - http://localhost:4013/api-docs (when running locally)
+- https://exam-orch.onrender.com/api-docs (My cloud hosted instance)
 
 ## Design Decisions and Assumptions
 
