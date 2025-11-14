@@ -65,6 +65,8 @@ app.get(["/", "/health"], (req: Request, res: Response): void => {
     });
 });
 
+const serverUrl = process.env.SERVER_URL || 'http://localhost:4013';
+
 // Swagger setup
 const options = {
   definition: {
@@ -76,7 +78,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:4013',
+        url: serverUrl,
         description: 'Development server'
       }
     ]
