@@ -31,6 +31,10 @@ RUN npm ci --only=production
 
 # Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
+
+# Copy docs for Swagger
+COPY --from=builder /app/docs ./docs
+
 # Copy any other necessary files
 COPY --from=builder /app/package.json ./package.json
 
