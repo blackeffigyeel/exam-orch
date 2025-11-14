@@ -65,6 +65,9 @@ app.get(["/", "/health"], (req: Request, res: Response): void => {
     });
 });
 
+const serverUrl = process.env.SERVER_URL || 'http://localhost:4013';
+const swaggerUrlDescription = process.env.NODE_ENV === 'production' ? 'Production server' : 'Development server';
+
 // Swagger setup
 const options = {
   definition: {
@@ -76,8 +79,8 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:4013',
-        description: 'Development server'
+        url: serverUrl,
+        description: swaggerUrlDescription
       }
     ]
   },
@@ -87,6 +90,8 @@ const options = {
 
 const specs = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
+app.use('/public', express.static(path.join(__dirname, '../public')));
 
 // API routes
 app.use("/api", apiRoutes);
