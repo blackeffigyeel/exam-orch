@@ -161,7 +161,7 @@ API documentation is available at:
 
 ## Testing
 
-![Successful Exam Sessio Service and Controller Test](./public/successfulExamSessionSandCTest.png)
+![Successful Exam Sessio Service and Controller Test](./assets/images/successfulExamSessionSandCTest.png)
 
 Run the test suite:
 
